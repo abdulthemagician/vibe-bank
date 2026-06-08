@@ -1,0 +1,3 @@
+This project was created for my **personal daily use**. It serves as a *dedicated tracker* for a **"guilt-free" happiness fund**, entirely separated from my *essential living expenses*.
+
+The core purpose of this project is to **save for personal joy**—whether it's *setting goals* for items I want to buy, *planning trips* to places I've always wanted to visit, or *purchasing gifts* for my loved ones. In short, this fund is meant for **anything that brings genuine happiness without any financial guilt.**
