@@ -108,7 +108,6 @@ app.put('/transaction/:id', async (req, res) => {
         let id = req.params.id;
         let updateTransaction = formatInput(req.body);
         let validation = validateInput(updateTransaction);
-        console.log(updateTransaction);
 
         if(!validation.isValid){
             const errors = new Error('ข้อมูลไม่ถูกต้อง');
@@ -123,6 +122,11 @@ app.put('/transaction/:id', async (req, res) => {
             `,
             [updateTransaction.transaction_date, updateTransaction.amount, updateTransaction.action_type, updateTransaction.note, id]
         );
+        if(result.affectedRows === 0){
+            const error = new Error(`ไม่พบผู้ใช้ ID: ${id}`);
+            error.statusCode = 400;
+            throw error;
+        }
 
         res.status(200).json({
             success: true,
@@ -144,9 +148,9 @@ app.put('/transaction/:id', async (req, res) => {
 app.delete('/transaction/:id', async (req, res) => {
     try{
         let id = req.params.id;
-        const [result] = await db.query('DELETE FROM money_record WHERE id = ?', id);
+        const [result] = await db.query('DELETE FROM money_record WHERE id = ?', [id]);
         if(result.affectedRows === 0){
-            const errors = new Error(`ไม่พบไอดีผู้ใช้ id: ${id}`);
+            const errors = new Error(`ไม่พบผู้ใช้ ID: ${id}`);
             errors.statusCode = 400;
             throw errors;
 
