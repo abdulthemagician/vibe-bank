@@ -60,7 +60,7 @@ let validateInput = (data) => {
 
 app.get('/transaction/', async (req, res) => {
     try{
-        const [result] = await db.query('SELECT * FROM money_record;');
+        const [result] = await db.query('SELECT * FROM transactions;');
         res.status(200).json(result);
     }catch (error){
         console.log('error: ', error.code);
@@ -85,7 +85,7 @@ app.post('/transaction/', async (req, res) => {
         }
     
         const [result] = await db.query(
-            'INSERT INTO money_record (transaction_date, amount, action_type, note) VALUES (?, ?, ?, ?)',
+            'INSERT INTO transactions (transaction_date, amount, action_type, note) VALUES (?, ?, ?, ?)',
             [transaction.transaction_date, transaction.amount, transaction.action_type, transaction.note]
         );
     
@@ -119,7 +119,7 @@ app.put('/transaction/:id', async (req, res) => {
             throw errors;
         }
         const [result] = await db.query(`
-            UPDATE money_record
+            UPDATE transactions
             SET transaction_date = ?, amount = ?, action_type = ?, note = ?
             WHERE id = ?
             `,
@@ -151,7 +151,7 @@ app.put('/transaction/:id', async (req, res) => {
 app.delete('/transaction/:id', async (req, res) => {
     try{
         let id = req.params.id;
-        const [result] = await db.query('DELETE FROM money_record WHERE id = ?', [id]);
+        const [result] = await db.query('DELETE FROM transactions WHERE id = ?', [id]);
         if(result.affectedRows === 0){
             const errors = new Error(`ไม่พบผู้ใช้ ID: ${id}`);
             errors.statusCode = 400;
