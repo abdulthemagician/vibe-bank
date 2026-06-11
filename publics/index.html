@@ -14,16 +14,16 @@
             <div class="row mb-2">
                 <label class="form-label text-center" for="transaction-date">วันที่ทำธุรกรรม</label>
                 <!-- Add JS Script for fetch current datetime local-->
-                <input class="form-control mx-auto" name="transaction-date" type="datetime-local" style="width: 200px">
+                <input id="transaction-date-input" class="form-control mx-auto" name="transaction-date" type="datetime-local" value="" style="width: 200px" required>
             </div>
             <div class="row mb-2 align-items-center justify-content-center">
                 <div class="col-sm-6 col-10 mb-2">
                     <label class="form-label text-center d-block" for="amount">จำนวนเงิน</label>
-                    <input class="form-control w-75 mx-auto text-center" name="amount" type="number" placeholder="20">
+                    <input id="amount-input" class="form-control w-75 mx-auto text-center" name="amount" type="number" placeholder="20" required>
                 </div>
                 <div class="col-sm-6 col-10 mb-2">
                     <label class="form-label text-center d-block" for="action-type">ประเภทธุรกรรม</label>
-                    <select class="form-control w-75 mx-auto text-center" name="action-type">
+                    <select id="action-input" class="form-control w-75 mx-auto text-center" name="action-type" required>
                         <option value="deposit">ฝากเงิน</option>
                         <option value="withdraw">ถอนเงิน</option>
                     </select>
@@ -31,14 +31,15 @@
                 <div class="row">
                     <div class="col">
                         <label class="form-label text-center d-block" for="notes">Notes</label>
-                        <textarea class="form-control text-center mx-auto" name="notes" rows="3" cols="8"></textarea>
+                        <textarea id="note-input" class="form-control text-center mx-auto" name="notes" rows="3" cols="8"></textarea>
                     </div>
                 </div>
             </div>
+            <div id="message" class="d-none container justify-content-center align-items-center mt-3">ABC</div>
             <div class="row mb-2">
                 <div class="d-flex gap-2 justify-content-center mt-3">
-                    <button class="btn btn-primary" type="button">Submit</button>
-                    <button class="btn btn-outline-secondary" type="button">Clear</button>
+                    <button class="btn btn-outline-primary" type="button">Submit</button>
+                    <button class="btn btn-outline-secondary" type="button" id="clear-btn">Clear</button>
                 </div>
             </div>
         </form>
