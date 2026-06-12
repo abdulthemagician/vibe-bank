@@ -14,16 +14,16 @@
             <div class="row mb-2">
                 <label class="form-label text-center" for="transaction-date">วันที่ทำธุรกรรม</label>
                 <!-- Add JS Script for fetch current datetime local-->
-                <input id="transaction-date-input" class="form-control mx-auto" name="transaction-date" type="datetime-local" value="" style="width: 200px" required>
+                <input id="transaction-date-input" class="form-control mx-auto" name="transaction-date" type="datetime-local" value="" style="width: 200px" >
             </div>
             <div class="row mb-2 align-items-center justify-content-center">
                 <div class="col-sm-6 col-10 mb-2">
                     <label class="form-label text-center d-block" for="amount">จำนวนเงิน</label>
-                    <input id="amount-input" class="form-control w-75 mx-auto text-center" name="amount" type="number" placeholder="20" required>
+                    <input id="amount-input" class="form-control w-75 mx-auto text-center" name="amount" type="number" placeholder="20" >
                 </div>
                 <div class="col-sm-6 col-10 mb-2">
                     <label class="form-label text-center d-block" for="action-type">ประเภทธุรกรรม</label>
-                    <select id="action-input" class="form-control w-75 mx-auto text-center" name="action-type" required>
+                    <select id="action-input" class="form-control w-75 mx-auto text-center" name="action-type" >
                         <option value="deposit">ฝากเงิน</option>
                         <option value="withdraw">ถอนเงิน</option>
                     </select>
@@ -35,11 +35,11 @@
                     </div>
                 </div>
             </div>
-            <div id="message" class="d-none container justify-content-center align-items-center mt-3">ABC</div>
             <div class="row mb-2">
-                <div class="d-flex gap-2 justify-content-center mt-3">
-                    <button class="btn btn-outline-primary" type="button">Submit</button>
-                    <button class="btn btn-outline-secondary" type="button" id="clear-btn">Clear</button>
+                <div id="status-alert" class="container justify-content-center align-items-center"></div>
+                <div class="d-flex gap-2 justify-content-center mt-2">
+                    <button class="btn btn-outline-primary" type="submit">Submit</button>
+                    <button class="btn btn-outline-secondary" type="reset" id="clear-btn">Clear</button>
                 </div>
             </div>
         </form>
