@@ -3,7 +3,7 @@ const amountInput = document.getElementById('amount-input');
 const noteInput = document.getElementById('note-input');
 const actionInput = document.getElementById('action-input');
 const editTransactionId = document.getElementById('edit-transaction-id');
-const API_URL = 'http://localhost:8000/transaction';
+const API_URL = 'http://zeppeli.local:8000/transaction';
 const totalBalanceDisplay = document.getElementById('total-balance');
 
 let currentBalance = 0.0;
@@ -47,7 +47,7 @@ const toISOTimeString = (date = new Date()) => {
     const temp = {
         'day': String(date.getDate()).padStart(2, '0'),
         'month': String(date.getMonth() + 1).padStart(2, '0'),
-        'year': String(date.getFullYear() + 543),
+        'year': String(date.getFullYear()),
         'hour': String(date.getHours()).padStart(2, '0'),
         'minute': String(date.getMinutes()).padStart(2, '0')
     }
@@ -137,7 +137,7 @@ const statusAlert = document.getElementById('status-alert');
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
     try{
-        const transactionDate = (transactionDateInput.value.slice(0, 4) - 543) + transactionDateInput.value.slice(4);
+        const transactionDate = transactionDateInput.value;
         const amount = amountInput.value;
         const action_type = actionInput.value;
         const note = noteInput.value;

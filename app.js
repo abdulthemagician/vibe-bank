@@ -8,9 +8,9 @@ require('dotenv').config();
 const port = process.env.PORT || 8000;
 const app = express();
 
+app.use(cors());
 app.use(bodyparser.json());
 app.use(express.static(path.join(__dirname, 'publics')));
-app.use(cors());
 
 const db = mysql.createPool({
     host: process.env.DB_HOST,
