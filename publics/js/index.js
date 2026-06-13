@@ -3,6 +3,9 @@ const amountInput = document.getElementById('amount-input');
 const noteInput = document.getElementById('note-input');
 const actionInput = document.getElementById('action-input');
 const API_URL = 'http://localhost:8000';
+const totalBalanceDisplay = document.getElementById('total-balance');
+
+let currentBalance = 0.0;
 
 const validateInput = (transaction) => {
     let errors = [];
@@ -51,12 +54,21 @@ const getCurrentDate = () => {
     return `${now.year}-${now.month}-${now.day}T${now.hour}:${now.minute}`
 }
 
+const updateTransactionDateInput = () => {
+    transactionDateInput.value = getCurrentDate();
+}
+
+const updateBalance = () => {
+    totalBalanceDisplay.textContent = currentBalance;
+}
+
 const tableBody = document.getElementById('table-body');
 const fetchTransaction = async () => {
     try{
         const response = await axios.get(`${API_URL}/transaction/`);
         const transactions = response.data;
         tableBody.innerHTML = '';
+        currentBalance = 0;
         transactions.forEach((transaction) => {
             const tableRow = document.createElement('tr');
             const transaction_date = document.createElement('td');
@@ -71,7 +83,10 @@ const fetchTransaction = async () => {
 
             tableRow.append(transaction_date, amount, action_type, notes);
             tableBody.append(tableRow);
+
+            currentBalance += transaction.action_type === 'deposit' ? transaction.amount : -transaction.amount;
         });
+        updateBalance();
     }catch(error){
         console.log(error.message);
     }
@@ -106,7 +121,9 @@ form.addEventListener('submit', async (event) => {
         statusAlert.classList.remove('alert-danger');
         statusAlert.classList.add('d-flex', 'alert', 'alert-success');
         form.reset();
-        transactionDateInput.value = getCurrentDate();
+        updateTransactionDateInput();
+        updateBalance();
+        fetchTransaction();
     }catch(error){
         if(error.response){
             const statusCode = error.response.data.status;
@@ -132,7 +149,7 @@ form.addEventListener('submit', async (event) => {
 const clearBtn = document.getElementById('clear-btn');
 clearBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    transactionDateInput.value = getCurrentDate();
+    updateTransactionDateInput();
     amountInput.value = '';
     noteInput.value = '';
     actionInput.value = 'deposit';
@@ -141,5 +158,5 @@ clearBtn.addEventListener('click', (event) => {
     statusAlert.classList.remove('d-flex', 'alert', 'alert-success', 'alert-danger');
 });
 
-transactionDateInput.value = getCurrentDate();
 fetchTransaction();
+updateTransactionDateInput();
